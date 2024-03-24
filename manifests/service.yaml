@@ -5,8 +5,8 @@ metadata:
 spec:
   selector:
     env: prod
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     - protocol: TCP
-      port: 8000
+      port: 80
       targetPort: 8000
