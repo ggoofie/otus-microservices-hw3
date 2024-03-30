@@ -7,25 +7,18 @@
 	},
 	"item": [
 		{
-			"name": "Запрос для проверки /health",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "arch.homework/health",
-					"host": [
-						"arch",
-						"homework"
-					],
-					"path": [
-						"health"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Запрос для проверки rewrite-правила на ingress",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -43,9 +36,47 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Запрос для проверки /health",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "arch.homework/health",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
 		{
 			"listen": "test",
 			"script": {
@@ -53,6 +84,8 @@
 				"exec": [
 					"pm.test(\"Status code is 200\", function () {",
 					"  pm.response.to.have.status(200);",
+					"  const responseJson = pm.response.json();",
+					"  pm.expect(responseJson.status).to.eql(\"OK\");",
 					"});"
 				]
 			}

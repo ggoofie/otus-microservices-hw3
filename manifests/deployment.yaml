@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: health-app
-          image: ggoofie/otus-microservices-hw-2:latest
+          image: ggoofie/otus-microservices-hw3:latest
           ports:
             - containerPort: 8000
           livenessProbe:
